@@ -1,36 +1,54 @@
 class Person:
-    marks = []
-    def __init__(self, name, sex, age, subjects):
+    name = "Masha"
+    sex = 0
+    age = 12
+    num_of_subjects = 5
+    marks = [1, 2, 3]
+    def __init__ (self, name, sex, age, num_of_subjects):
         self.name = name
         self.sex = sex
         self.age = age
-        if 1 <= subjects <= 10:
-            self.subjects = subjects
+        if 1 <= num_of_subjects <= 10:
+            self.num_of_subjects = num_of_subjects
         else:
-            raise ValueError("Wrong num of subjects")
-
-
+            raise ValueError("wrong num of subjects")
+            
     def __str__(self):
-        return f"My name is {self.name} and i am {self.age} years old, also I have {self.subjects} subjects"
-
-
-    def setMarks(self, marks:list):
+        return f"My name is {self.name}. I'm {self.age}. I have {self.num_of_subjects} subjects"
+            
+    def setMarks(self, marks):
         if type(marks) == str:
-            marks = "".join(marks.split(";"))
+            marks = ''.join(marks.split(';'))
             marks = [int(i) for i in marks.split()]
-        if not len(marks) == self.subjects:
-            raise ValueError("Wrong num of marks")
+        if not len(marks) == self.num_of_subjects:
+            raise ValueError("wrong num of marks")
         for mark in marks:
             if not 0 <= mark <= 10:
-                raise ValueError("Wrong type of mark")
+                raise ValueError("wrong type of mark")
+        
         self.marks = marks
+        
 
-
+class Pupil(Person):
+    def __init__ (self, class_number, class_symbol):
+        self.class_number = class_number
+        self.class_symbol = class_symbol
+        if not 6 <= Person.age <= 18:
+            raise ValueError("-15 matritsa credit, wrong age")
+        if not 65 <= self.class_symbol <= 90:
+            raise ValueError("+15 matritsa credit, wrong symbol")
+    
+    
+    
+    def __str__(self):
+        return f"My name is {Person.name}. I am {Person.age}. I have {Person.num_of_subjects} subjects. I am in {self.class_number} named {chr(self.class_symbol)}"
+        
+        
 def main():
-    a = Person("Vova", 1, 12, 3)
-    a.setMarks([1, 2, 3])
-    print(a)
+    p = Pupil(8, 70)
+    print(p)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
+    
